@@ -11,7 +11,7 @@ buildscript {
 }
 
 plugins {
-    id "org.gradle.kotlin.kotlin-dsl" version "1.4.9"
+    id "org.gradle.kotlin.kotlin-dsl" version "2.1.7"
 }
 
 println """\
@@ -27,7 +27,6 @@ apply plugin: 'codenarc'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'groovy'
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 apply plugin: 'com.jfrog.bintray'
@@ -56,15 +55,15 @@ configurations {
 dependencies {
     compileOnly "com.android.tools.build:gradle:3.5.0"
 
-    compile 'com.google.guava:guava:27.0.1-jre'
-    compile 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
-    compile 'commons-lang:commons-lang:2.6'
+    compileOnly 'com.google.guava:guava:27.0.1-jre'
+    compileOnly 'com.google.gradle:osdetector-gradle-plugin:1.7.0'
+    compileOnly 'commons-lang:commons-lang:2.6'
 
-    testCompile 'junit:junit:4.12'
-    testCompile ('org.spockframework:spock-core:1.0-groovy-2.4') {
+    testCompileOnly 'junit:junit:4.12'
+    testCompileOnly ('org.spockframework:spock-core:2.1-groovy-3.0') {
       exclude module : 'groovy-all'
     }
-    testCompile 'commons-io:commons-io:2.5'
+    testCompileOnly 'commons-io:commons-io:2.5'
 }
 
 test.inputs.files fileTree("$projectDir/testProject")
@@ -92,8 +91,8 @@ codenarc {
     toolVersion = "1.4"
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 tasks.withType(GenerateModuleMetadata) {
   enabled = false
@@ -178,7 +177,7 @@ tasks.create("checkJavaVersion").doLast {
         "The plugin must be published under Java 1.8 but ${javaVersion} is found")
   }
 }
-[uploadArchives, publishPlugins]*.dependsOn checkJavaVersion
+[publish, publishPlugins]*.dependsOn checkJavaVersion
 
 if (System.env.CI == 'true') {
   // Normally html output is more user friendly,

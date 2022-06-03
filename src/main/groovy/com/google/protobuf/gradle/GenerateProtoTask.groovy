@@ -29,10 +29,11 @@
  */
 package com.google.protobuf.gradle
 
+import org.gradle.internal.impldep.com.google.common.collect.ImmutableList
+
 import static java.nio.charset.StandardCharsets.US_ASCII
 
 import com.google.common.base.Preconditions
-import com.google.common.collect.ImmutableList
 import groovy.transform.CompileDynamic
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException

@@ -29,7 +29,6 @@
  */
 package com.google.protobuf.gradle
 
-import com.google.common.collect.ImmutableList
 import groovy.transform.CompileDynamic
 import org.gradle.api.Action
 import org.gradle.api.GradleException
@@ -46,6 +45,7 @@ import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.internal.file.FileResolver
 import org.gradle.api.plugins.AppliedPlugin
 import org.gradle.api.tasks.SourceSet
+import org.gradle.internal.impldep.com.google.common.collect.ImmutableList
 
 import javax.inject.Inject
 
